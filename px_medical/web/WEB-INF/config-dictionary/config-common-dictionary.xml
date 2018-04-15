@@ -691,6 +691,15 @@
             </value>
         </property>
     </bean>
+     <!-- 突发事件  主要信息类别 -->
+     <bean id="dicEventTypeMain" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+        <property name="displayName" value="主要信息类别"/>
+        <property name="dictionarySql">
+            <value>
+                SELECT event_type_id AS DICTKEY, event_name AS DICTVALUE FROM emergency_event.event_type WHERE valid_Flag = '1' and LENGTH(event_type_code)=3
+            </value>
+        </property>
+    </bean>
      <!-- 突发事件  事件发生场所 -->
      <bean id="dicEventArea" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
         <property name="displayName" value="事件发生场所"/>

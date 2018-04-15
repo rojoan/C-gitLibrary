@@ -71,7 +71,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label must-red">信息类别</label>
 				<div class="col-md-10">
-					#formRadioButtonsLabel("eventTypeId" "$!emHealthReport.eventTypeId" $dicData.dicEventType "" "" "class='checkbox-inline i-checks'")
+					#formRadioButtonsLabel("eventTypeId" "$!emHealthReport.eventTypeId" $dicData.dicEventTypeMain "" "" "class='checkbox-inline i-checks'")
 				</div>
 			</div>
 			<div class=" form-group">
