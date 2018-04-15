@@ -2348,4 +2348,116 @@
            </value>
 	    </property>
 	  </bean>
+	  
+	  
+	  
+	  <!-- 职业中毒 -->
+	  <bean id="dicDiseaseFactor3" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="致病因素-职业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT disease_factor_id AS DICTKEY, disease_factor_name AS DICTVALUE FROM emergency_event.disease_factor WHERE valid_flag = '1' AND event_type_id=3
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicOccurReason3" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="事件发生原因-职业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT occur_reason_id AS DICTKEY, occur_reason AS DICTVALUE FROM emergency_event.occur_reason WHERE valid_flag = '1' AND event_type_id=3
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicPatientDeal3" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="病人处理过程-职业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT patient_deal_id AS DICTKEY, patient_deal AS DICTVALUE FROM emergency_event.patient_deal WHERE valid_flag = '1' AND event_type_id=3
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicControlMeasure3" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="事情控制措施-职业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT control_measure_id AS DICTKEY, control_measure AS DICTVALUE FROM emergency_event.control_measure WHERE valid_flag = '1' AND event_type_id=3
+	  		</value>
+	  	</property>
+	  </bean>
+	  <!-- 农业中毒 -->
+	  <bean id="dicDiseaseFactor4" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="致病因素-农业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT disease_factor_id AS DICTKEY, disease_factor_name AS DICTVALUE FROM emergency_event.disease_factor WHERE valid_flag = '1' AND event_type_id=4
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicOccurReason4" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="事件发生原因-农业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT occur_reason_id AS DICTKEY, occur_reason AS DICTVALUE FROM emergency_event.occur_reason WHERE valid_flag = '1' AND event_type_id=4
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicPatientDeal4" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="病人处理过程-农业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT patient_deal_id AS DICTKEY, patient_deal AS DICTVALUE FROM emergency_event.patient_deal WHERE valid_flag = '1' AND event_type_id=4
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicControlMeasure4" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="事情控制措施-农业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT control_measure_id AS DICTKEY, control_measure AS DICTVALUE FROM emergency_event.control_measure WHERE valid_flag = '1' AND event_type_id=4
+	  		</value>
+	  	</property>
+	  </bean>
+	  <!-- 农业中毒-中毒类型 -->
+	  <bean id="dicSubEventTypeId4" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="事件信息类别子类型-农业中毒"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT event_type_id AS DICTKEY, event_name AS DICTVALUE FROM emergency_event.event_type WHERE valid_flag = '1' AND LENGTH(event_type_code)=6 AND SUBSTR(event_type_code,0,3)='004'
+	  		</value>
+	  	</property>
+	  </bean>
+	  
+	  <!-- 免疫接种 -->
+	  <bean id="dicDiseaseFactor7" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="致病因素-免疫接种"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT disease_factor_id AS DICTKEY, disease_factor_name AS DICTVALUE FROM emergency_event.disease_factor WHERE valid_flag = '1' AND event_type_id=7
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicOccurReason7" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="事件发生原因-免疫接种"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT occur_reason_id AS DICTKEY, occur_reason AS DICTVALUE FROM emergency_event.occur_reason WHERE valid_flag = '1' AND event_type_id=7
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicPatientDeal7" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="病人处理过程-免疫接种"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT patient_deal_id AS DICTKEY, patient_deal AS DICTVALUE FROM emergency_event.patient_deal WHERE valid_flag = '1' AND event_type_id=7
+	  		</value>
+	  	</property>
+	  </bean>
+	  <bean id="dicControlMeasure7" class="com.bofan.dictionary.support.DatabaseDictionaryItem">
+	  	<property name="displayName" value="事情控制措施-免疫接种"></property>
+	  	<property name="dictionarySql">
+	  		<value>
+	  			SELECT control_measure_id AS DICTKEY, control_measure AS DICTVALUE FROM emergency_event.control_measure WHERE valid_flag = '1' AND event_type_id=7
+	  		</value>
+	  	</property>
+	  </bean>
  </beans>
