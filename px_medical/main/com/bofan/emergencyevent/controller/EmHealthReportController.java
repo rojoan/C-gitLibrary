@@ -270,4 +270,8 @@ public class EmHealthReportController  extends AbstractAnnotationController{
 		return result;
     }
     
+    @RequestMapping("/addEventType.do")
+    public String addEventType(Long eventTypeId) {
+    	return "emergencyevent/EventTypeImmunization";
+    }
 }
