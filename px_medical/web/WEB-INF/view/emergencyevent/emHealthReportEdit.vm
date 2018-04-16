@@ -361,5 +361,17 @@
 	 	    });
 
 	    });
+	    
+	   //添加疾病相关信息按钮  监控绑定的选中事件
+		$("input[name='eventTypeId'] ").on('ifChecked', function(eventTypeId_Tab){
+			//获取选中信息类别 input radio的 value值（eventTypeId）
+			var eventTypeId = $(eventTypeId_Tab.currentTarget).val();
+			var title = '{'+eventTypeId+'}传染相关信息';
+			var url = '../emHealthReport/addEventType.do?eventTypeId';
+			common.open(url, title, {
+				area : [ '99%', '99%' ]
+			});
+		});
+	    
 </script>
 
