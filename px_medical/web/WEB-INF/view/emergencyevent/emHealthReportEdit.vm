@@ -22,7 +22,7 @@
 		<input type="hidden" id="submitFlag" >
 		<input type="hidden" id="healthReportId" name="healthReportId" value="$!emHealthReport.healthReportId" >
 		
-		<div class="row">
+		<div class="row" id="emHealthReportInput">
 
 			<div class="col-md-6 form-group">
 				<label class="col-md-4 control-label must-red">填报单位</label>
@@ -70,14 +70,14 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label must-red">信息类别</label>
-				<div class="col-md-10">
-					#formRadioButtonsLabel("eventTypeId" "$!emHealthReport.eventTypeId" $dicData.dicEventTypeMain "" "" "class='checkbox-inline i-checks'")
+				<div class="col-md-10" id="eventTypeDiv">
+					#formRadioButtonsLabel("eventTypeId" "$!emHealthReport.eventTypeId" $dicData.dicEventType "" "" "class='checkbox-inline i-checks'")
 				</div>
 			</div>
+			
 			<div class=" form-group">
 				<label class="col-md-2 control-label must-red">突发事件等级</label>
 				<div class="col-md-10">
-					<!-- <label class="checkbox-inline i-checks"> <input type="radio" name="aa" value="">特别重大 </label>   -->
 					#formRadioButtonsLabel("eventLevelId" "$!emHealthReport.eventLevelId" $dicData.dicEventLevel "" "" "class='checkbox-inline i-checks'")
 				</div>
 
@@ -259,28 +259,34 @@
 					<input name="mainMeasure" value="$!emHealthReport.mainMeasure"  maxlength="300" type="text" class="form-control" style="width: 94.8%">
 				</div>
 			</div>
-
 		</div>
+		
 	</form>
+	<div id="asd"></div>
+			<!-- #parse("./emergencyevent/eventTypeDetail/eventTypeImmunization.vm")-->
 </div>
-<div class="modal-footer" style="text-align: center">
-	<button onclick="saveEmHealthReport();" type="button" class="btn btn-success">
-		<i class="fa fa-save"></i> 保存
+<div class="modal-footer" style="text-align: center" >
+    <button id="backEmHealthReport"  onclick="back();" type="button" class="btn btn-success">
+		<i class="fa fa-save"></i> 上一步
 	</button>
-	<button type="button" class="btn btn-warning" data-dismiss="modal">
+    <button id="nextEmHealthReport" onclick="saveEmHealthReport($dicData.dicEventTypeAddr);" type="button" class="btn btn-success">
+		<i class="fa fa-save"></i> 下一步
+	</button>
+	<button id="saveEmHealthReport" onclick="saveEventType();" type="button" class="btn btn-success">
+		<i class="fa fa-save"></i> 提交
+	</button>
+	<button id="closeEmHealthReport" onclick="" type="button" class="btn btn-warning" data-dismiss="modal">
 		<i class="fa fa-close"></i> 关闭
 	</button>
 </div>
 
 #parse("./common/common.js.vm")
-
 <script>
 
         // 提交上转申请表单
-        function saveEmHealthReport() {
+        function saveEmHealthReport(eventTypeAddr) {
         	 var emHealthReportParams = common.serializeObject($('#emHealthReportForm'));
             
-            //
             if (emHealthReportParams.fillTime == undefined || emHealthReportParams.fillTime == "") {
                 common.alert("请选择填报日期",0);
                 return false;
@@ -310,7 +316,7 @@
                 return false;
             }
             if (emHealthReportParams.firstDiagnosis == undefined || emHealthReportParams.firstDiagnosis == "") {
-                common.alert("请勾选突发事件等级",0);
+                common.alert("请填报初步诊断信息",0);
                 return false;
             }
             if (emHealthReportParams.firstDiagnosisTime == undefined || emHealthReportParams.firstDiagnosisTime == "") {
@@ -337,8 +343,9 @@
 			}else{
 				emHealthReportParams.occurRegionId = $("#occurRegionId").parent().find(".select-item").last().attr('data-code');
 			}
- 
-            $.post("../emHealthReport/saveEmHealthReport.do", emHealthReportParams, function (result) {
+            //执行下一步操作
+            next(eventTypeAddr);
+            /* $.post("../emHealthReport/saveEmHealthReport.do", emHealthReportParams, function (result) {
                 if (result.code == "0") {
                     $('#submitFlag').val("1");
                     $("#healthReportId").val( result.data.healthReportId);
@@ -348,7 +355,7 @@
                     common.alert("保存失败",0);
                     $('#submitFlag').val("");
                 }
-            }, "json");
+            }, "json"); */
         }
 	    
         //对报告地区 发生地区
@@ -359,19 +366,43 @@
 	    	$('#occurRegionIdReset').click(function () {
 	 			 $('#occurRegionId').citypicker('reset');
 	 	    });
+	    	
+	    	$("#backEmHealthReport").hide();
+	    	$("#saveEmHealthReport").hide();
 
 	    });
-	    
-	   //添加疾病相关信息按钮  监控绑定的选中事件
-		$("input[name='eventTypeId'] ").on('ifChecked', function(eventTypeId_Tab){
-			//获取选中信息类别 input radio的 value值（eventTypeId）
-			var eventTypeId = $(eventTypeId_Tab.currentTarget).val();
-			var title = '{'+eventTypeId+'}传染相关信息';
-			var url = '../emHealthReport/addEventType.do?eventTypeId';
-			common.open(url, title, {
-				area : [ '99%', '99%' ]
-			});
-		});
-	    
+        //隐藏下一步，显示上一步
+        function next(eventTypeAddr) {
+			
+			var radios=$("#eventTypeDiv input");
+			var eventTypeId;
+			console.log(radios[1].value);
+			for(var i=0;i<radios.length;i++){
+				if(radios[i].checked==true){
+					eventTypeId=radios[i].value;
+				}
+			}
+			alert(eventTypeAddr.get(1));
+            //var parseStr="#parse(\"./emergencyevent/eventTypeDetail/"+eventTypeAddr.get(eventTypeId)+"\")";
+			alert(parseStr);
+			$("#asd").innerHTML=parseStr;
+			$("#eventTypeInput").show();
+        	$("#backEmHealthReport").show();
+	    	$("#saveEmHealthReport").show();
+	    	$("#nextEmHealthReport").hide();
+	    	$("#closeEmHealthReport").hide();
+	    	$("#emHealthReportInput").hide();
+	    	
+		}
+        //隐藏上一步，显示下一步
+        function back() {
+        	$("#backEmHealthReport").hide();
+	    	$("#saveEmHealthReport").hide();
+	    	$("#nextEmHealthReport").show();
+	    	$("#closeEmHealthReport").show();
+	    	$("#emHealthReportInput").show();
+	    	$("#eventTypeInput").hide();
+		}
+
 </script>
 
